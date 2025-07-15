@@ -117,8 +117,15 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Barra lateral
-st.sidebar.image("https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg", use_container_width=True)
+import requests
+from PIL import Image
+from io import BytesIO
+
+url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
+response = requests.get(url_logo)
+img = Image.open(BytesIO(response.content))
+
+st.sidebar.image(img, use_container_width=True)
 
 menu = st.sidebar.selectbox("Menu", [
     "Cadastro de Alunos", 
