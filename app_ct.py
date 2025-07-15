@@ -3,6 +3,23 @@ import pandas as pd
 from datetime import datetime
 import os
 import re
+import requests
+from PIL import Image
+from io import BytesIO
+
+# --- Coloque este bloco aqui, logo após os imports ---
+def carregar_logo(url):
+    try:
+        resposta = requests.get(url)
+        resposta.raise_for_status()
+        img = Image.open(BytesIO(resposta.content))
+        return img
+    except Exception as e:
+        st.sidebar.error(f"Erro ao carregar logo: {e}")
+        return None
+
+url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
+logo = carregar_logo(url_logo)
 
 
 def formatar_cpf(cpf):
@@ -85,6 +102,12 @@ if 'professores' not in st.session_state:
 if 'despesas' not in st.session_state:
     st.session_state.despesas = carregar_dados(DESPESAS_PATH, ["Descrição", "Valor", "Dia Vencimento"])
 
+if logo:
+    st.sidebar.image(logo, use_container_width=True)
+else:
+    st.sidebar.write("Logo não disponível")
+
+
 st.markdown(
     """
     <h1 style='text-align: center; font-weight: 900; font-size: 3.5rem; margin-bottom: 1rem;'>
@@ -116,23 +139,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-import requests
-from PIL import Image
-from io import BytesIO
-import streamlit as st
-
-url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
-
-response = requests.get(url_logo)
-if response.status_code == 200:
-    try:
-        img = Image.open(BytesIO(response.content))
-        st.sidebar.image(img, use_container_width=True)
-    except Exception as e:
-        st.sidebar.write(f"Erro ao abrir imagem: {e}")
-else:
-    st.sidebar.write("Não foi possível carregar a imagem.")
 
 menu = st.sidebar.selectbox("Menu", [
     "Cadastro de Alunos", 
