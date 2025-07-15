@@ -4,9 +4,7 @@ from datetime import datetime
 import os
 import re
 import requests
-from PIL import Image
 from io import BytesIO
-
 
 def formatar_cpf(cpf):
     numeros = re.sub(r'\D', '', str(cpf))
@@ -122,9 +120,9 @@ st.markdown(
 
 url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
 response = requests.get(url_logo)
-img = Image.open(BytesIO(response.content))
 
-st.sidebar.image(img, use_container_width=True)
+# Passa o conteúdo da resposta diretamente
+st.sidebar.image(response.content, use_container_width=True)
 
 menu = st.sidebar.selectbox("Menu", [
     "Cadastro de Alunos", 
