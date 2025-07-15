@@ -7,6 +7,8 @@ from PIL import Image
 from io import BytesIO
 import requests
 
+url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
+
 def formatar_cpf(cpf):
     numeros = re.sub(r'\D', '', str(cpf))
     if len(numeros) == 11:
