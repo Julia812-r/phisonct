@@ -7,23 +7,8 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-# --- Coloque este bloco aqui, logo após os imports ---
-def carregar_logo(url):
-    try:
-        resposta = requests.get(url)
-        resposta.raise_for_status()
-        img = Image.open(BytesIO(resposta.content))
-        return img
-    except Exception as e:
-        st.sidebar.error(f"Erro ao carregar logo: {e}")
-        return None
-
-url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg
-try:
-    st.sidebar.image(url_logo, use_container_width=True)
-except Exception as e:
-    st.sidebar.write(f"Erro ao carregar imagem diretamente: {e}")
-logo = carregar_logo(url_logo)
+url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/refs/heads/main/logo.jpg"
+st.sidebar.image(url_logo, use_container_width=True)
 
 def formatar_cpf(cpf):
     numeros = re.sub(r'\D', '', str(cpf))
@@ -104,11 +89,6 @@ if 'professores' not in st.session_state:
 
 if 'despesas' not in st.session_state:
     st.session_state.despesas = carregar_dados(DESPESAS_PATH, ["Descrição", "Valor", "Dia Vencimento"])
-
-if logo:
-    st.sidebar.image(logo, use_container_width=True)
-else:
-    st.sidebar.write("Logo não disponível")
 
 
 st.markdown(
