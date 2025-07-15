@@ -3,6 +3,9 @@ import pandas as pd
 from datetime import datetime
 import os
 import re
+import requests
+from PIL import Image
+from io import BytesIO
 
 
 def formatar_cpf(cpf):
@@ -116,10 +119,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-import requests
-from PIL import Image
-from io import BytesIO
 
 url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
 response = requests.get(url_logo)
