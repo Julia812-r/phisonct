@@ -7,14 +7,20 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/refs/heads/main/logo.jpg"
-st.sidebar.image(url_logo, use_container_width=True)
+import streamlit as st
+import requests
+from PIL import Image
+from io import BytesIO
 
-def formatar_cpf(cpf):
-    numeros = re.sub(r'\D', '', str(cpf))
-    if len(numeros) == 11:
-        return f"{numeros[:3]}.{numeros[3:6]}.{numeros[6:9]}-{numeros[9:]}"
-    return cpf
+url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/refs/heads/main/logo.jpg"
+
+try:
+    response = requests.get(url_logo)
+    response.raise_for_status()
+    img = Image.open(BytesIO(response.content))
+    st.sidebar.image(img, use_container_width=True)
+except Exception as e:
+    st.sidebar.write(f"Erro ao carregar logo: {e}")
 
 def formatar_telefone(tel):
     numeros = re.sub(r'\D', '', str(tel))
