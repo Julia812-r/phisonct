@@ -3,11 +3,7 @@ import pandas as pd
 from datetime import datetime
 import os
 import re
-from PIL import Image
-from io import BytesIO
-import requests
 
-url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
 
 def formatar_cpf(cpf):
     numeros = re.sub(r'\D', '', str(cpf))
@@ -121,9 +117,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+import requests
+from PIL import Image
+from io import BytesIO
+import streamlit as st
+
+url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg"
+
 response = requests.get(url_logo)
-img = Image.open(BytesIO(response.content))
-st.sidebar.image(img, use_container_width=True)
+if response.status_code == 200:
+    try:
+        img = Image.open(BytesIO(response.content))
+        st.sidebar.image(img, use_container_width=True)
+    except Exception as e:
+        st.sidebar.write(f"Erro ao abrir imagem: {e}")
+else:
+    st.sidebar.write("Não foi possível carregar a imagem.")
 
 menu = st.sidebar.selectbox("Menu", [
     "Cadastro de Alunos", 
