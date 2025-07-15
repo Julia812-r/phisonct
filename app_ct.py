@@ -118,7 +118,7 @@ st.markdown(
 )
 
 # Barra lateral
-st.sidebar.image("https://github.com/Julia812-r/phisonct/blob/main/logo.jpg", use_container_width=True)
+st.sidebar.image("https://raw.githubusercontent.com/Julia812-r/phisonct/main/logo.jpg", use_container_width=True)
 
 menu = st.sidebar.selectbox("Menu", [
     "Cadastro de Alunos", 
