@@ -7,11 +7,6 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-import streamlit as st
-import requests
-from PIL import Image
-from io import BytesIO
-
 url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/refs/heads/main/logo.jpg"
 
 try:
