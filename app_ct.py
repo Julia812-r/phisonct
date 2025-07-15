@@ -118,7 +118,7 @@ st.markdown(
 )
 
 # Barra lateral
-st.sidebar.image(r"C:\Users\pm25625\Downloads\logo.jpg", use_container_width=True)
+st.sidebar.image("logo.jpg", use_container_width=True)
 
 menu = st.sidebar.selectbox("Menu", [
     "Cadastro de Alunos", 
