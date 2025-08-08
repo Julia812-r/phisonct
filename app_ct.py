@@ -7,6 +7,21 @@ import requests
 from PIL import Image
 from io import BytesIO
 
+def formatar_cpf(cpf):
+    numeros = re.sub(r'\D', '', str(cpf))
+    if len(numeros) == 11:
+        return f"{numeros[:3]}.{numeros[3:6]}.{numeros[6:9]}-{numeros[9:]}"
+    return cpf
+
+def formatar_telefone(telefone):
+    numeros = re.sub(r'\D', '', str(telefone))
+    if len(numeros) == 11:
+        return f"({numeros[:2]}) {numeros[2:7]}-{numeros[7:]}"
+    elif len(numeros) == 10:
+        return f"({numeros[:2]}) {numeros[2:6]}-{numeros[6:]}"
+    return telefone
+
+
 url_logo = "https://raw.githubusercontent.com/Julia812-r/phisonct/refs/heads/main/logo.jpg"
 
 try:
@@ -564,5 +579,6 @@ elif menu == "Financeiro":
         st.metric("Saldo", f"R$ {saldo:.2f}")
 
         st.dataframe(preparar_para_exibir(df_filtrado))          
+
 
 
