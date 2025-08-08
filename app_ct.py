@@ -232,6 +232,21 @@ if menu == "Cadastro de Alunos":
     status = st.selectbox("Status", ["Ativo", "Não Ativo"])
 
     if st.button("Salvar aluno"):
+        cpf_formatado = formatar_cpf(cpf)
+        celular_formatado = formatar_telefone(celular)
+        novo = {
+            "Nome": nome,
+            "CPF": cpf_formatado,
+            "Nascimento": nascimento,
+            "Celular": celular_formatado,
+            "Email": email,
+            "Plano": plano,
+            "Periodicidade": periodicidade,
+            "Valor": valor,
+            "Vencimento": vencimento,
+            "Necessidades": necessidades,
+            "Status": status
+        }
         st.session_state.alunos = pd.concat([st.session_state.alunos, pd.DataFrame([novo])], ignore_index=True)
         salvar_dados()
         st.success("Aluno cadastrado!")
@@ -550,3 +565,4 @@ elif menu == "Financeiro":
 
         st.dataframe(preparar_para_exibir(df_filtrado))          
 
+                    ^^^^^^^^^^^^
