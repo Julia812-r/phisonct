@@ -565,4 +565,4 @@ elif menu == "Financeiro":
 
         st.dataframe(preparar_para_exibir(df_filtrado))          
 
-                    ^^^^^^^^^^^^
+
